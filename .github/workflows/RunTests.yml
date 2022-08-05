@@ -1,0 +1,28 @@
+name: Run tests
+on:
+  #push:
+  #  branches: [ master ]
+  #pull_request:
+  #  branches: [ main ]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '6.0.x'
+      - uses: cryptic-wizard/run-specflow-tests@v1.2.0
+        with:
+          test-assembly-path: bin/Release/net6.0
+          test-assembly-dll: BBlog.Tests.dll
+          test-execution-json: TestExecution.json
+          output-html: TestResults/AutomatedTestResults.html
+      - uses: actions/upload-artifact@v3
+        if: success() || failure()
+        with:
+          name: TestRunResults
+          path: |
+            TestResults
+            TestResults/Screenshots

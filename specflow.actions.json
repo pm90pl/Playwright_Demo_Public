@@ -1,0 +1,7 @@
+{
+  "playwright": {
+    "browser": "chrome", 
+    "defaultTimeout": 10,
+    "headless": true
+  }
+}

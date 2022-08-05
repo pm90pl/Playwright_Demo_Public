@@ -1,0 +1,20 @@
+{
+  "Environment": {
+    "AppBaseUrl": "",
+    "BasicAuth": {
+      "Login": "",
+      "Password": ""
+    }
+  },
+  "TestUser": {
+    "Username": "pm90pl",
+    "Email": "",
+    "Password": "qa-is-cool"
+  },
+  "SecondUser": {
+    "Username": "pm90pl2",
+    "Email": "",
+    "Password": "qa-is-cool"
+  }
+
+}

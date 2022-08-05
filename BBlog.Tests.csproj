@@ -1,0 +1,84 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<PlaywrightPlatform>all</PlaywrightPlatform>
+		<LangVersion>10.0</LangVersion>
+		<IsPackable>false</IsPackable>
+		<PlatformTarget>AnyCPU</PlatformTarget>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="AppAbstraction\Articles\**" />
+	  <EmbeddedResource Remove="AppAbstraction\Articles\**" />
+	  <None Remove="AppAbstraction\Articles\**" />
+	  <SpecFlowFeatureFiles Remove="AppAbstraction\Articles\**" />
+	  <SpecFlowObsoleteCodeBehindFiles Remove="AppAbstraction\Articles\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Remove="C:\Users\maciagp\.nuget\packages\microsoft.playwright.nunit\1.21.0\contentFiles\any\netstandard2.0\nunit.engine.api.dll" />
+		<Content Remove="C:\Users\maciagp\.nuget\packages\microsoft.playwright.nunit\1.21.0\contentFiles\any\netstandard2.0\nunit.engine.dll" />
+		<Content Remove="C:\Users\maciagp\.nuget\packages\microsoft.playwright.nunit\1.21.0\contentFiles\any\netstandard2.0\NUnit3.TestAdapter.dll" />
+		<Content Remove="C:\Users\maciagp\.nuget\packages\microsoft.playwright.nunit\1.21.0\contentFiles\any\netstandard2.0\NUnit3.TestAdapter.pdb" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <SpecFlowObsoleteCodeBehindFiles Remove="Features\Articles - Copy.feature.cs" />
+	</ItemGroup>
+
+	<!--<ItemGroup>
+		<None Remove="C:\Users\maciagp\.nuget\packages\nunit3testadapter\4.2.1\build\netcoreapp2.1\nunit.engine.api.dll" />
+		<None Remove="C:\Users\maciagp\.nuget\packages\nunit3testadapter\4.2.1\build\netcoreapp2.1\nunit.engine.dll" />
+		<None Remove="C:\Users\maciagp\.nuget\packages\nunit3testadapter\4.2.1\build\netcoreapp2.1\NUnit3.TestAdapter.dll" />
+		<None Remove="C:\Users\maciagp\.nuget\packages\nunit3testadapter\4.2.1\build\netcoreapp2.1\NUnit3.TestAdapter.pdb" />
+	</ItemGroup>-->
+
+	<ItemGroup>
+		<PackageReference Include="Faker.Net" Version="2.0.154" />
+		<PackageReference Include="FluentAssertions" Version="6.6.0" />
+		<PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.8" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
+		<PackageReference Include="Microsoft.Playwright" Version="1.21.0" />
+		<PackageReference Include="NUnit3TestAdapter" Version="4.2.1" />
+		<PackageReference Include="SpecFlow" Version="3.9.69" />
+		<PackageReference Include="SpecFlow.Actions.Playwright" Version="0.1.285" />
+		<PackageReference Include="SpecFlow.NUnit" Version="3.9.69" />
+		<PackageReference Include="SpecFlow.Plus.LivingDocPlugin" Version="3.9.57" />
+		<PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.9.69" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Features\Comments.feature.cs">
+	    <DependentUpon>Comments.feature</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="Resources\MockedApiResponses\FeedResponse.json">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="specflow.actions.json">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="EnvSettings.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="TestResults\ExploratoryTestResults.md">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <SpecFlowFeatureFiles Update="Features\Comments.feature">
+	    <Visible>$(UsingMicrosoftNETSdk)</Visible>
+	    <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+	  </SpecFlowFeatureFiles>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include=".github\workflows\RunTests.yml" />
+	</ItemGroup>
+
+</Project>
